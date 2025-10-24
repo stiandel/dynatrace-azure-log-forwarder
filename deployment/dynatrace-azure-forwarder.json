@@ -143,6 +143,24 @@
                 }
             }
         },
+	{
+            "apiVersion": "2019-06-01",
+            "type": "Microsoft.Network/virtualNetworks/subnets",
+            "name": "snet-dt-noprod-001",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "addressPrefix": "10.202.36.0/27",
+		"networkSecurityGroup": {
+                        "id": "/subscriptions/9b0d92aa-0859-4149-8902-6e4a7031e2f7/resourceGroups/rg-dynatrace-noprod-001/providers/Microsoft.Network/networkSecurityGroups/nsg-dt-noprod-001" },
+                "routeTable": { "id": "/subscriptions/9b0d92aa-0859-4149-8902-6e4a7031e2f7/resourceGroups/rg-dynatrace-noprod-001/providers/Microsoft.Network/routeTables/rt-dynatrace-noprod-001" },
+                "ipConfigurations": [
+                        { "id": "/subscriptions/9b0d92aa-0859-4149-8902-6e4a7031e2f7/resourceGroups/RG-DYNATRACE-NOPROD-001/providers/Microsoft.Network/networkInterfaces/VM-DYNATRACE-QA-001938/ipConfigurations/IPCONFIG1"
+                        }
+                    ],
+                "privateEndpointNetworkPolicies": "Enabled",
+                "privateLinkServiceNetworkPolicies": "Enabled"
+            }
+        },
         {
             "apiVersion": "2019-06-01",
             "type": "Microsoft.Network/virtualNetworks/subnets",
@@ -182,7 +200,7 @@
             "name": "[concat(variables('virtualNetworkName'), '/', variables('containerSubnetName'))]",
             "location": "[resourceGroup().location]",
             "properties": {
-                "addressPrefix": "10.202.36.65.27",
+                "addressPrefix": "10.202.36.65/27",
                 "delegations": [
                     {
                         "name": "private-subnet-delegation",
