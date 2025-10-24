@@ -1,5 +1,5 @@
 # azure-log-forwarder
-
+# testing
 ## Run functions locally
 Prerequisites:
 * Visual Studio Code
