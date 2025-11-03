@@ -112,11 +112,11 @@
         "networkProfileName": "[concat(parameters('forwarderName'),'networkProfile')]",
         "interfaceConfigName": "eth0",
         "interfaceIpConfig": "ipconfigprofile1",
-        "virtualNetworkName": "vnet-dt-noprod-001",
+        "virtualNetworkName": "[concat(parameters('forwarderName'),'-vnet')]",
         "functionSubnetName": "functionapp",
         "containerSubnetName": "aci",
-        "appServicePlan": "azapp-dyna-qa-001",
-        "functionName": "azf-dyna-qa-001",
+        "appServicePlan": "[concat(parameters('forwarderName'),'-plan')]",
+        "functionName": "[concat(parameters('forwarderName'),'-function')]",
 		"forwarderNameShort": "[take(parameters('forwarderName'), 18)]",
 		"randomIdToMakeStorageAccountGloballyUnique": "[substring(uniqueString(parameters('forwarderName'), resourceGroup().id), 0, 4)]",
         "storageAccountName": "[concat(variables('forwarderNameShort'), 'sa', variables('randomIdToMakeStorageAccountGloballyUnique'))]",
@@ -138,7 +138,7 @@
             "properties": {
                 "addressSpace": {
                     "addressPrefixes": [
-                        "10.202.36.0/24"
+                        "172.0.0.0/22"
                     ]
                 }
             }
@@ -153,7 +153,7 @@
             "name": "[concat(variables('virtualNetworkName'), '/', variables('functionSubnetName'))]",
             "location": "[resourceGroup().location]",
             "properties": {
-                "addressPrefix": "10.202.36.33/27",
+                "addressPrefix": "172.0.1.0/24",
                 "serviceEndpoints": [
                     {
                         "service": "Microsoft.Storage"
@@ -182,7 +182,7 @@
             "name": "[concat(variables('virtualNetworkName'), '/', variables('containerSubnetName'))]",
             "location": "[resourceGroup().location]",
             "properties": {
-                "addressPrefix": "10.202.36.65/27",
+                "addressPrefix": "172.0.0.0/24",
                 "delegations": [
                     {
                         "name": "private-subnet-delegation",
@@ -415,7 +415,7 @@
                         },
                         {
                             "name": "DYNATRACE_URL",
-                            "value": "[if(parameters('deployActiveGateContainer'), concat('https://110.202.36.36:9999/e/', variables('registryUser')), parameters('targetUrl'))]"
+                            "value": "[if(parameters('deployActiveGateContainer'), concat('https://172.0.0.4:9999/e/', variables('registryUser')), parameters('targetUrl'))]"
                         },
                         {
                             "name": "DYNATRACE_ACCESS_KEY",
