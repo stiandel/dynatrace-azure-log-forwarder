@@ -116,7 +116,7 @@
         "functionSubnetName": "functionapp",
         "containerSubnetName": "aci",
         "appServicePlan": "[concat('asp-',parameters('forwarderName'),'-001')]",
-        "functionName": "[concat('fn-',parameters('forwarderName'),'-001')]",
+        "functionName": "[concat('azf-',parameters('forwarderName'),'-001')]",
 		"forwarderNameShort": "[take(parameters('forwarderName'), 18)]",
 		"randomIdToMakeStorageAccountGloballyUnique": "[substring(uniqueString(parameters('forwarderName'), resourceGroup().id), 0, 4)]",
         "storageAccountName": "[concat('stmb',variables('forwarderNameShort'), 'sa', variables('randomIdToMakeStorageAccountGloballyUnique'))]",
